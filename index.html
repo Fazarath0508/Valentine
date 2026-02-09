@@ -228,7 +228,6 @@
             font-size: clamp(18px, 2.2vw, 22px);
             color: var(--muted);
             margin: 0 0 18px;
-            font-weight: 500;
         }
 
         .gifbox {
@@ -296,151 +295,6 @@
                 opacity: 0;
             }
         }
-
-        /* Share button styling */
-        .share-trigger {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--card);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-            padding: 10px 18px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--ink);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .share-trigger:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            background: white;
-        }
-
-        /* Modal styling */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(122, 31, 61, 0.2);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal {
-            background: white;
-            padding: clamp(20px, 5vw, 40px);
-            border-radius: 24px;
-            width: min(450px, 90vw);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-
-        .modal h2 {
-            margin-top: 0;
-            color: var(--ink);
-        }
-
-        .modal p {
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .input-group {
-            text-align: left;
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .modal input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #fde2ea;
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .modal input:focus {
-            border-color: var(--yes2);
-        }
-
-        .btn-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .copy-btn {
-            background: var(--yes);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: filter 0.2s;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .close-modal {
-            margin-top: 15px;
-            background: none;
-            border: none;
-            color: var(--muted);
-            font-size: 14px;
-            cursor: pointer;
-            font-weight: 600;
-        }
     </style>
 </head>
 
@@ -483,37 +337,7 @@
 
             <div class="love">I Love You More Then Anything Honey ❤️</div>
             <div class="love" id="whoself">You just made my heart skip... and maybe my mind too 😘🔥</div>
-        </div>
-    </div>
-    </div>
 
-    <!-- Share Trigger -->
-    <button class="share-trigger" id="shareTrigger">
-        <span>🔗</span> Share with your Valentine
-    </button>
-
-    <!-- Share Modal -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <h2>Share the Love 💝</h2>
-            <p>Generate a personalized link to send!</p>
-
-            <div class="input-group">
-                <label>Her Name</label>
-                <input type="text" id="valentineInput" placeholder="Her name..." />
-            </div>
-
-            <div class="input-group">
-                <label>Your Name</label>
-                <input type="text" id="yourNameInput" placeholder="Your name..." />
-            </div>
-
-            <div class="btn-stack">
-                <button class="copy-btn" id="copyBtn">Copy Personalized Link</button>
-                <a href="#" class="whatsapp-btn" id="whatsappBtn" target="_blank">Share on WhatsApp</a>
-            </div>
-
-            <button class="close-modal" id="closeModal">Cancel</button>
         </div>
     </div>
 
@@ -521,9 +345,6 @@
 
     <script>
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const WIFE_NAME = urlParams.get('valentineName') || 'My Dear Honey Hansifa';
-        const selfName = urlParams.get('name') || 'Fazarath';
         // ✅ Tweak how hard NO is to click
         const EVADE_DISTANCE = 50;
         const EDGE_PADDING = 18;
@@ -532,8 +353,8 @@
         let evasionStarted = false;
         let resetTimer = null;
 
-        document.getElementById("who").textContent = WIFE_NAME;
-        document.getElementById("whoself").textContent = `~ ${selfName}`;
+        document.getElementById("who").textContent = 'My Dear Honey Hansifa';
+        document.getElementById("whoself").textContent = `~ Fazarath`;
 
 
         const askCard = document.getElementById("askCard");
@@ -678,58 +499,6 @@
             }
             setTimeout(() => confetti.classList.add("hidden"), 7000);
         }
-
-        // Sharing Logic
-        const shareTrigger = document.getElementById('shareTrigger');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const closeModal = document.getElementById('closeModal');
-        const valentineInput = document.getElementById('valentineInput');
-        const yourNameInput = document.getElementById('yourNameInput');
-        const copyBtn = document.getElementById('copyBtn');
-        const whatsappBtn = document.getElementById('whatsappBtn');
-
-        // Pre-fill names
-        valentineInput.value = WIFE_NAME === 'My Dear Honey Hansifa' ? '' : WIFE_NAME;
-        yourNameInput.value = selfName === 'Fazarath' ? '' : selfName;
-
-        shareTrigger.addEventListener('click', () => {
-            modalOverlay.classList.add('active');
-        });
-
-        const hideModal = () => modalOverlay.classList.remove('active');
-        closeModal.addEventListener('click', hideModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) hideModal();
-        });
-
-        function getGeneratedUrl() {
-            const vName = valentineInput.value || 'My Dear Honey Hansifa';
-            const sName = yourNameInput.value || 'Fazarath';
-            const baseUrl = window.location.origin + window.location.pathname;
-            const params = new URLSearchParams();
-            params.set('valentineName', vName);
-            params.set('name', sName);
-            return `${baseUrl}?${params.toString()}`;
-        }
-
-        copyBtn.addEventListener('click', () => {
-            const url = getGeneratedUrl();
-            navigator.clipboard.writeText(url).then(() => {
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = '✅ Copied!';
-                copyBtn.style.background = '#4CAF50';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                    copyBtn.style.background = '';
-                }, 2000);
-            });
-        });
-
-        whatsappBtn.addEventListener('click', (e) => {
-            const url = getGeneratedUrl();
-            const text = `Hey! I made something special for you ❤️ ${url}`;
-            whatsappBtn.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
-        });
     </script>
 </body>
 
