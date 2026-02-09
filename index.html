@@ -407,7 +407,8 @@
         }
 
         function moveNoRandom() {
-            const bounds = noSlot.getBoundingClientRect();
+            const playground = document.getElementById("playground");
+            const bounds = playground.getBoundingClientRect();
             const br = noBtn.getBoundingClientRect();
             if (!evasionStarted) {
                 evasionStarted = true;
