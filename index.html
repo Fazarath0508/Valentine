@@ -211,23 +211,22 @@
         .gifbox {
             width: 90vw;
             max-height: 180px;
-            /* Mobile-first: small by default */
             margin: 10px auto;
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            /* Removed background to make it transparent */
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .gifbox img {
             width: 100%;
             height: auto;
             max-height: 180px;
-            /* Mobile-first: small by default */
             object-fit: contain;
             display: block;
+            margin: 0 auto;
             pointer-events: none;
         }
 
