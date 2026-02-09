@@ -209,10 +209,10 @@
         }
 
         .gifbox {
-            width: min(420px, 86vw);
-            max-height: 280px;
-            /* Reduced from 360px */
-            margin: 18px auto;
+            width: 90vw;
+            max-height: 180px;
+            /* Mobile-first: small by default */
+            margin: 10px auto;
             border-radius: 18px;
             overflow: hidden;
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
@@ -224,7 +224,8 @@
         .gifbox img {
             width: 100%;
             height: auto;
-            max-height: 280px;
+            max-height: 180px;
+            /* Mobile-first: small by default */
             object-fit: contain;
             display: block;
             pointer-events: none;
@@ -269,6 +270,19 @@
             }
         }
 
+        /* �️ Desktop/Tablet: Larger images */
+        @media (min-width: 481px) {
+            .gifbox {
+                width: min(420px, 86vw);
+                max-height: 280px !important;
+                margin: 18px auto;
+            }
+
+            .gifbox img {
+                max-height: 280px !important;
+            }
+        }
+
         /* 📱 Aggressive Mobile Fixes */
         @media (max-width: 480px) {
             h1 {
@@ -282,19 +296,6 @@
             .yayline {
                 font-size: 14px !important;
                 margin-bottom: 12px;
-            }
-
-            .gifbox {
-                max-height: 180px !important;
-                margin: 10px auto;
-                width: 90vw !important;
-            }
-
-            .gifbox img {
-                max-height: 180px !important;
-                height: auto !important;
-                width: 100% !important;
-                object-fit: contain !important;
             }
 
             .card {
