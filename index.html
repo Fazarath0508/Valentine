@@ -6,26 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Valentine 💘</title>
 
-    <!-- ✅ Only font change (Poppins like the screenshot theme) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* ✅ same vibe as the screenshot: soft pink background */
             --pink1: #fde2ea;
             --pink2: #fbe7ef;
-
-            /* ✅ font colors like screenshot */
             --ink: #7a1f3d;
-            /* main text */
             --muted: #b44a6f;
-            /* sub text */
-
             --yes: #e83a5a;
             --yes2: #ff5c7a;
-
             --card: rgba(255, 255, 255, 0.82);
             --shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
         }
@@ -46,10 +38,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* floating hearts */
         .hearts {
             position: fixed;
             inset: 0;
@@ -82,6 +73,7 @@
         .wrap {
             width: min(980px, 92vw);
             padding: 28px 18px;
+            z-index: 10;
         }
 
         .card {
@@ -124,7 +116,6 @@
         .name {
             font-weight: 800;
             color: #d6336c;
-            /* ✅ cute highlight */
         }
 
         .row {
@@ -136,18 +127,10 @@
             min-height: 60px;
             position: relative;
             z-index: 20;
+            flex-wrap: wrap;
         }
 
-        .no-slot {
-            position: relative;
-            width: 140px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: default;
-        }
-
+        .no-slot,
         .yes-slot {
             position: relative;
             width: 140px;
@@ -155,22 +138,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .no {
-            position: static;
-            min-width: 120px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(122, 31, 61, 0.18);
-            color: #6b1b36;
-            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
-        }
-
-        .no.evading {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
         }
 
         button {
@@ -187,29 +154,27 @@
             z-index: 30;
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
         .yes {
             background: linear-gradient(180deg, var(--yes2), var(--yes));
             color: #fff;
             box-shadow: 0 10px 22px rgba(232, 58, 90, 0.35);
             min-width: 120px;
             font-weight: 700;
-        }
-
-        .yes:hover {
-            box-shadow: 0 14px 28px rgba(232, 58, 90, 0.45);
             cursor: pointer;
         }
 
-        .tiny-hearts {
-            display: inline-flex;
-            gap: 6px;
-            margin-left: 10px;
-            vertical-align: middle;
-            transform: translateY(-2px);
+        .no {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(122, 31, 61, 0.18);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+            min-width: 120px;
+        }
+
+        .no.evading {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .hidden {
@@ -228,6 +193,7 @@
             font-size: clamp(18px, 2.2vw, 22px);
             color: var(--muted);
             margin: 0 0 18px;
+            font-weight: 500;
         }
 
         .gifbox {
@@ -240,8 +206,6 @@
             border: 1px solid rgba(0, 0, 0, 0.06);
             background: rgba(255, 255, 255, 0.6);
             position: relative;
-            z-index: 0;
-            pointer-events: none;
         }
 
         .gifbox img {
@@ -251,10 +215,7 @@
             object-fit: contain;
             display: block;
             pointer-events: none;
-            user-select: none;
         }
-
-        /* controls stacking handled in main .row rule above */
 
         .love {
             margin-top: 18px;
@@ -275,7 +236,6 @@
             position: absolute;
             width: 10px;
             height: 16px;
-            opacity: 0;
             border-radius: 3px;
             animation: confettiFall 1.8s ease-in infinite;
         }
@@ -302,11 +262,10 @@
     <div class="hearts" aria-hidden="true" id="hearts"></div>
 
     <div class="wrap">
+        <!-- ASK CARD -->
         <div class="card" id="askCard">
             <div class="banner"></div>
-            <h1><span class="name" id="who">My Dear Honey Hansifa</span>,<br />Will you be my Valentine?
-                <span class="tiny-hearts" aria-hidden="true"><span>🤍</span><span>🖤</span></span>
-            </h1>
+            <h1><span class="name">My Dear Honey Hansifa</span>,<br />Will you be my Valentine?</h1>
             <p class="sub">Choose wisely... but the "No" button is shy arround you and My heart is already whispering
                 "Yes" for us .❣️.</p>
 
@@ -315,18 +274,16 @@
             </div>
 
             <div class="row" id="playground">
-                <!-- ✅ DO NOT change yes-slot / no-slot structure -->
-                <div class="yes-slot" id="yesSlot">
+                <div class="yes-slot">
                     <button class="yes" id="yesBtn">YES</button>
                 </div>
-
                 <div class="no-slot" id="noSlot">
                     <button class="no" id="noBtn">NO</button>
                 </div>
             </div>
-
         </div>
 
+        <!-- YAY CARD -->
         <div class="card hidden" id="yayCard">
             <h2 class="yay">You just stole my heart.... again 😘</h2>
             <p class="yayline">You are the best desicion of my life.</p>
@@ -336,63 +293,22 @@
             </div>
 
             <div class="love">I Love You More Then Anything Honey ❤️</div>
-            <div class="love" id="whoself">You just made my heart skip... and maybe my mind too 😘🔥</div>
-
+            <div class="love">~ Fazarath</div>
         </div>
     </div>
 
     <div class="confetti hidden" id="confetti" aria-hidden="true"></div>
 
     <script>
-
-        // ✅ Tweak how hard NO is to click
-        const EVADE_DISTANCE = 50;
-        const EDGE_PADDING = 18;
-        const MOVE_MS = 140;
-
-        let evasionStarted = false;
-        let resetTimer = null;
-
-        document.getElementById("who").textContent = 'My Dear Honey Hansifa';
-        document.getElementById("whoself").textContent = `~ Fazarath`;
-
-
         const askCard = document.getElementById("askCard");
         const yayCard = document.getElementById("yayCard");
         const yesBtn = document.getElementById("yesBtn");
         const noBtn = document.getElementById("noBtn");
-        const playground = document.getElementById("playground");
-        const confetti = document.getElementById("confetti");
         const noSlot = document.getElementById("noSlot");
+        const confetti = document.getElementById("confetti");
 
-        playground.addEventListener("pointermove", (e) => {
-            const r = noBtn.getBoundingClientRect();
-            const cx = r.left + r.width / 2;
-            const cy = r.top + r.height / 2;
-
-            const dx = e.clientX - cx;
-            const dy = e.clientY - cy;
-            const dist = Math.hypot(dx, dy);
-
-            // if (dist < EVADE_DISTANCE) moveNoRandom();
-        });
-
-        noBtn.addEventListener("pointerdown", (e) => {
-            e.preventDefault();
-            moveNoRandom(true);
-
-            if (isMobileLike()) {
-                setFunnyNoText()
-            }
-        });
-
-        noBtn.addEventListener("mouseenter", (e) => {
-            e.preventDefault();
-            moveNoRandom(true)
-            if (!setFunnyNoText()) {
-                setFunnyNoText()
-            }
-        });
+        let evasionStarted = false;
+        const MOVE_MS = 140;
 
         yesBtn.addEventListener("click", () => {
             askCard.classList.add("hidden");
@@ -400,77 +316,48 @@
             startConfetti();
         });
 
+        noBtn.addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            moveNoRandom();
+            setFunnyNoText();
+        });
+
+        noBtn.addEventListener("mouseenter", (e) => {
+            e.preventDefault();
+            moveNoRandom();
+            setFunnyNoText();
+        });
+
         const funnyNoTexts = [
-            "This could be a mistake!",
-            "Think again 😶‍🌫️",
-            "Don't do this to me 💔",
-            "Give it another thought!",
-            "You might regret this!",
-            "Really sure ?",
-            "Surely not!",
-            "Last chance! 😬",
-            "Are you absolutely certian? 🙅‍♂️",
-            "I will cry 😭",
-            "Please no 🥺",
+            "This could be a mistake!", "Think again 😶‍🌫️", "Don't do this to me 💔",
+            "Give it another thought!", "You might regret this!", "Really sure ?",
+            "Surely not!", "Last chance! 😬", "Are you absolutely certian? 🙅‍♂️",
+            "I will cry 😭", "Please no 🥺"
         ];
         let lastNoTextIndex = -1;
 
         function setFunnyNoText() {
-
             let idx = Math.floor(Math.random() * funnyNoTexts.length);
             if (idx === lastNoTextIndex) idx = (idx + 1) % funnyNoTexts.length;
             lastNoTextIndex = idx;
-
             noBtn.textContent = funnyNoTexts[idx];
-
-            // optional: reset back to "NO" after a bit
-            clearTimeout(resetTimer);
-            resetTimer = setTimeout(() => {
-                if (!evasionStarted) noBtn.textContent = "NO";
-            }, 1200);
-
         }
 
-        function isMobileLike() {
-            const coarsePointer = matchMedia("(pointer: coarse)").matches;
-            const noHover = matchMedia("(hover: none)").matches;
-            const smallViewport = Math.min(window.innerWidth, window.innerHeight) <= 768;
-            return (coarsePointer && noHover) || smallViewport;
-        }
-
-        function moveNoRandom(extraFar = false) {
+        function moveNoRandom() {
             const bounds = noSlot.getBoundingClientRect();
-            const bw = bounds.width;
-            const bh = bounds.height;
-
             const br = noBtn.getBoundingClientRect();
-            const w = br.width;
-            const h = br.height;
-
             if (!evasionStarted) {
                 evasionStarted = true;
                 noBtn.classList.add("evading");
-                noBtn.style.transform = "";
-                noBtn.style.left = `${(bw - w) / 2}px`;
-                noBtn.style.top = `${(bh - h) / 2}px`;
             }
-
-            const maxX = Math.max(0, bw - w);
-            const maxY = Math.max(0, bh - h);
-
-            let x = Math.random() * maxX;
-            let y = Math.random() * maxY;
-
-            noBtn.style.transition = `left ${MOVE_MS}ms ease, top ${MOVE_MS}ms ease`;
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-
+            const maxX = Math.max(0, bounds.width - br.width);
+            const maxY = Math.max(0, bounds.height - br.height);
+            noBtn.style.left = `${Math.random() * maxX}px`;
+            noBtn.style.top = `${Math.random() * maxY}px`;
         }
 
-        function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
-        // Floating hearts
-        const hearts = document.getElementById("hearts");
+        // Hearts animation
+        const heartsContainer = document.getElementById("hearts");
         const heartEmojis = ["💗", "💖", "💞", "💕", "💘"];
         for (let i = 0; i < 22; i++) {
             const s = document.createElement("span");
@@ -480,24 +367,19 @@
             s.style.animationDuration = (7 + Math.random() * 9) + "s";
             s.style.animationDelay = (-Math.random() * 10) + "s";
             s.style.fontSize = (16 + Math.random() * 16) + "px";
-            hearts.appendChild(s);
+            heartsContainer.appendChild(s);
         }
 
-        // Confetti
         function startConfetti() {
             confetti.classList.remove("hidden");
-            confetti.innerHTML = "";
-            const pieces = 80;
-            for (let i = 0; i < pieces; i++) {
+            for (let i = 0; i < 80; i++) {
                 const p = document.createElement("i");
                 p.style.left = (Math.random() * 100) + "vw";
                 p.style.animationDelay = (Math.random() * 1.2) + "s";
                 p.style.animationDuration = (1.4 + Math.random() * 1.5) + "s";
-                const hue = Math.floor(Math.random() * 360);
-                p.style.background = `hsl(${hue} 90% 60%)`;
+                p.style.background = `hsl(${Math.random() * 360} 90% 60%)`;
                 confetti.appendChild(p);
             }
-            setTimeout(() => confetti.classList.add("hidden"), 7000);
         }
     </script>
 </body>
