@@ -134,10 +134,12 @@
             justify-content: center;
             gap: 18px;
             margin-top: 10px;
-            min-height: 60px;
+            min-height: 160px;
+            /* Space for button to jump */
             position: relative;
             z-index: 20;
             flex-wrap: wrap;
+            padding: 20px;
         }
 
         .no-slot,
@@ -410,14 +412,27 @@
             const playground = document.getElementById("playground");
             const bounds = playground.getBoundingClientRect();
             const br = noBtn.getBoundingClientRect();
+
             if (!evasionStarted) {
                 evasionStarted = true;
                 noBtn.classList.add("evading");
+                noBtn.style.position = "absolute";
+                // Move button to playground if it isn't already there to ensure relative positioning works
+                if (noBtn.parentElement !== playground) {
+                    playground.appendChild(noBtn);
+                }
             }
-            const maxX = Math.max(0, bounds.width - br.width);
-            const maxY = Math.max(0, bounds.height - br.height);
-            noBtn.style.left = `${Math.random() * maxX}px`;
-            noBtn.style.top = `${Math.random() * maxY}px`;
+
+            // Boundary padding
+            const pad = 15;
+            const maxX = bounds.width - br.width - (pad * 2);
+            const maxY = bounds.height - br.height - (pad * 2);
+
+            const randomX = pad + Math.random() * Math.max(0, maxX);
+            const randomY = pad + Math.random() * Math.max(0, maxY);
+
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
         }
 
         // Hearts animation
